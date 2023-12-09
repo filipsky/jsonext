@@ -1,0 +1,11 @@
+name: json_extensions
+description: A starting point for Dart libraries or applications.
+version: 0.0.1
+repository: https://github.com/chaitanyabsprip/json_extensions
+
+environment:
+  sdk: ">=2.19.6 <3.0.0"
+
+dev_dependencies:
+  lints: ^2.0.0
+  very_good_analysis: 5.1.0

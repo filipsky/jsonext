@@ -6,7 +6,7 @@ Explore the provided extension methods to streamline your JSON parsing. Here's a
 import 'package:json_extensions/json_extensions.dart';
 
 void main() {
-  const Json data = {
+  const data = {
     'name': 'John Doe',
     'age': 30,
     'isStudent': false,
@@ -19,31 +19,35 @@ void main() {
     },
   };
 
-  String name = data.asString('name', fallback: 'Unknown');
+  final name = data.asString('name', fallback: 'Unknown');
   print('Name: $name');
 
-  int? age = data.asIntN('age');
+  final age = data.asIntN('age');
   print('Age: $age');
 
-  bool isStudent = data.asBool('isStudent', fallback: true);
+  final isStudent = data.asBool('isStudent', fallback: true);
   print('Is Student: $isStudent');
 
-  DateTime birthDate = data.asDateTime('birthDate', fallback: DateTime.now());
+  final birthDate = data.asDateTime('birthDate', fallback: DateTime.now());
   print('Birth Date: $birthDate');
 
-  double? height = data.asDoubleN('height');
+  final height = data.asDoubleN('height');
   print('Height: $height');
 
-  List<int> grades = data.asList('grades', fallback: []);
+  final grades = data.asList('grades', fallback: []);
   print('Grades: $grades');
 
-  Json<Map<String, dynamic>> contact = data.asJson('contact', fallback: {});
+  final contact = data.asJson('contact', fallback: {});
   print('Contact: $contact');
 
-  bool hasEmail = contact.has('email');
+  final hasEmail = contact.has('email');
   print('Has Email: $hasEmail');
 
-  String? email = contact.parseN('email', (json) => json.asStringN('email'), fallback: null);
+  final email = contact.parseN(
+    'email',
+    (json) => json.asStringN('email'),
+    fallback: null,
+  );
   print('Email: $email');
 }
 ```

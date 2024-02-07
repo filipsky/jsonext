@@ -3,7 +3,7 @@
 Explore the provided extension methods to streamline your JSON parsing. Here's a quick example:
 
 ```dart
-import 'package:json_kit/json_kit.dart';
+import 'package:jsonext/jsonext.dart';
 
 void main() {
   const data = {

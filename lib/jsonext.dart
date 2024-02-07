@@ -1,5 +1,5 @@
 /// Defines the Json type and provides convenient extensions to parse value from
 /// json object.
-library json_kit;
+library jsonext;
 
-export 'src/json_kit_base.dart';
+export 'src/jsonext_base.dart';

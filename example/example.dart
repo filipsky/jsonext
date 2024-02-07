@@ -1,4 +1,4 @@
-import 'package:json_kit/json_kit.dart';
+import 'package:jsonext/jsonext.dart';
 
 void main() {
   const data = {

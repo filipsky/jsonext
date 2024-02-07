@@ -1,39 +1,61 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Usage
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+Explore the provided extension methods to streamline your JSON parsing. Here's a quick example:
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+```dart
+import 'package:json_extensions/json_extensions.dart';
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+void main() {
+  const Json data = {
+    'name': 'John Doe',
+    'age': 30,
+    'isStudent': false,
+    'birthDate': '1992-05-15',
+    'height': 5.9,
+    'grades': [90, 85, 78],
+    'contact': {
+      'email': 'john@example.com',
+      'phone': '123-456-7890',
+    },
+  };
+
+  String name = data.asString('name', fallback: 'Unknown');
+  print('Name: $name');
+
+  int? age = data.asIntN('age');
+  print('Age: $age');
+
+  bool isStudent = data.asBool('isStudent', fallback: true);
+  print('Is Student: $isStudent');
+
+  DateTime birthDate = data.asDateTime('birthDate', fallback: DateTime.now());
+  print('Birth Date: $birthDate');
+
+  double? height = data.asDoubleN('height');
+  print('Height: $height');
+
+  List<int> grades = data.asList('grades', fallback: []);
+  print('Grades: $grades');
+
+  Json<Map<String, dynamic>> contact = data.asJson('contact', fallback: {});
+  print('Contact: $contact');
+
+  bool hasEmail = contact.has('email');
+  print('Has Email: $hasEmail');
+
+  String? email = contact.parseN('email', (json) => json.asStringN('email'), fallback: null);
+  print('Email: $email');
+}
+```
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- **Generic Type for JSON:** Introduces the `Json<T>` type, allowing strong typing for JSON objects.
 
-## Getting started
+- **Callback Signature for JSON Parsing:** Defines a callback signature, `FromJsonCallback<T>`, for creating custom parsers.
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+- **Extension Methods:** Offers a set of concise extension methods for common data types like integers, strings, booleans, date-time, doubles, maps, lists, and custom JSON structures.
 
-## Usage
+- **Parsing with Custom Callback:** Versatile method, `parseN`, for parsing JSON values using a custom callback with optional fallback.
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+- **Check for Key Existence:** The `has` method allows checking for the existence of a specific key in the JSON object.

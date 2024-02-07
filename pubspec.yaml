@@ -1,10 +1,11 @@
 ---
-name: json_extensions
-description: A starting point for Dart libraries or applications.
+name: json_kit
+description: Enhance Dart JSON manipulation with type safety, error-handling,
+  and expressive extensions for seamless data handling.
 version: 0.0.1
-homepage: https://github.com/chaitanyabsprip/json_extensions
-repository: https://github.com/chaitanyabsprip/json_extensions
-issue_tracker: https://github.com/chaitanyabsprip/json_extensions/issues
+homepage: https://github.com/chaitanyabsprip/json_kit
+repository: https://github.com/chaitanyabsprip/json_kit
+issue_tracker: https://github.com/chaitanyabsprip/json_kit/issues
 
 environment:
   sdk: ">=2.13.0 <4.0.0"

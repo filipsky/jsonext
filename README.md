@@ -43,9 +43,9 @@ void main() {
   final hasEmail = contact.has('email');
   print('Has Email: $hasEmail');
 
-  final email = contact.parseN(
-    'email',
-    (json) => json.asStringN('email'),
+  final contactObj = json.parseN(
+    'contact',
+    Contact.fromJson,
     fallback: null,
   );
   print('Email: $email');

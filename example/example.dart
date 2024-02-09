@@ -38,10 +38,15 @@ void main() {
   final hasEmail = contact.has('email');
   print('Has Email: $hasEmail');
 
+  // Contact object is not defined in this example.
   final contactObj = json.parseN(
     'contact',
     Contact.fromJson,
     fallback: null,
   );
-  print('Email: $email');
+  print(contactObj);
+
+  const jsonString = "{ 'name': 'John Doe', 'age': 30, 'isStudent': false, }";
+  final decodedJson = jsonString.decode;
+  print(decodedJson);
 }

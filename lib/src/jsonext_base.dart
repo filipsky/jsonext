@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 /// Generic type for json
 typedef Json<T extends Object?> = Map<String, T>;
 
 /// Signature of Callbacks that accept json and return a value;
 typedef FromJsonCallback<T extends Object?> = T Function(Json);
 
-/// Extensions on json type
+/// Empty json
+const emptyJson = <String, Object?>{};
+
+/// Extensions on [Json] type
 extension JsonParse on Json {
   /// Try to get value at [key] as int. If the key does not exist or value is
   /// an invalid int, return [fallback].
@@ -116,5 +121,15 @@ extension JsonParse on Json {
     } catch (e) {
       return fallback;
     }
+  }
+}
+
+/// Extensions for decoding json
+extension DecodeString on String {
+  /// Decode string to [Json?].
+  /// Json strings that start with '[' or are only lists are not supported.
+  Json? get decode {
+    assert(startsWith('{'), 'should be a non list json string');
+    return jsonDecode(this) as Json?;
   }
 }

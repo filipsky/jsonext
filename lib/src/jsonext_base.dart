@@ -30,7 +30,8 @@ extension JsonParse on Json {
   String? asStringN(String key) => this[key]?.toString();
 
   /// Try to get value at [key] as bool. If the key does not exist or value
-  /// can't bne converted to bool (any of ```['1', 'true', 'yes', '0', 'false', 'no']```), return [fallback].
+  /// can't bne converted to bool (any of ```['1', 'true', 'yes',
+  /// '0', 'false', 'no']```), return [fallback].
   bool asBool(String key, {bool fallback = false}) =>
       this.asBoolN(key) ?? fallback;
 
@@ -38,7 +39,8 @@ extension JsonParse on Json {
   static final List<String> falseConstants = ['0', 'false', 'no'];
 
   /// Try to get value at [key] as bool. If the key does not exist or value
-  /// can't bne converted to bool (any of ```['1', 'true', 'yes', '0', 'false', 'no']```), return null.
+  /// can't bne converted to bool (any of ```['1', 'true', 'yes',
+  /// '0', 'false', 'no']```), return null.
   bool? asBoolN(String key) {
     if (this[key] is bool) return this[key] as bool;
 

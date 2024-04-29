@@ -45,8 +45,8 @@ extension JsonParse on Json {
     if (this[key] is bool) return this[key] as bool;
 
     final str = this[key]?.toString().toLowerCase();
+    if (trueConstants.contains(str)) return true;
     if (falseConstants.contains(str)) return false;
-    if (trueConstants.contains(str)) return false;
 
     return null;
   }

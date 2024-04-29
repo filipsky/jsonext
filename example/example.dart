@@ -5,6 +5,7 @@ void main() {
     'name': 'John Doe',
     'age': 30,
     'isStudent': false,
+    'isStudent2': 'YES',
     'birthDate': '1992-05-15',
     'height': 5.9,
     'grades': [90, 85, 78],
@@ -22,6 +23,9 @@ void main() {
 
   final isStudent = data.asBool('isStudent', fallback: true);
   print('Is Student: $isStudent');
+
+  final isStudent2 = data.asBool('isStudent2', fallback: true);
+  print('Is Student2: $isStudent2');
 
   final birthDate = data.asDateTime('birthDate', fallback: DateTime.now());
   print('Birth Date: $birthDate');

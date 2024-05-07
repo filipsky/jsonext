@@ -48,15 +48,24 @@ void main() {
   final hasEmail = contact.has('email');
   print('Has Email: $hasEmail');
 
-  // Contact object is not defined in this example.
-  //final contactObj = json.parseN(
-  //  'contact',
-  //  Contact.fromJson,
-  //  fallback: null,
-  //);
-  //print(contactObj);
+  final contactObj = data.parseN(
+    'contact',
+    (data) => Contact.fromJson(data),
+    fallback: null,
+  );
+  print(contactObj);
 
   const jsonString = '{ "name": "John Doe", "age": 30, "isStudent": false }';
   final decodedJson = jsonString.decode;
   print(decodedJson);
+}
+
+class Contact {
+  Contact(this.email, this.phone);
+
+  Contact.fromJson(Map<String, Object?> json)
+      : email = json.asString('email'),
+        phone = json.asString('phone');
+  final String email;
+  final String phone;
 }

@@ -31,13 +31,12 @@ extension JsonParse on Json {
 
   /// Try to get value at [key] as bool. If the key does not exist or value
   /// can't be converted to bool, return [fallback].
-  bool asBool(String key, {bool fallback = false}) =>
-      this.asBoolN(key) ?? fallback;
+  bool asBool(String key, {bool fallback = false}) => asBoolN(key) ?? fallback;
 
   /// Try to get value at [key] as bool. If the key does not exist or value
   /// can't be converted to bool, return null.
   bool? asBoolN(String key) {
-    if (this[key] is bool) return this[key] as bool;
+    if (this[key] is bool) return this[key]! as bool;
 
     final str = this[key]?.toString().toLowerCase();
     return str == 'true'

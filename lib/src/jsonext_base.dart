@@ -30,25 +30,21 @@ extension JsonParse on Json {
   String? asStringN(String key) => this[key]?.toString();
 
   /// Try to get value at [key] as bool. If the key does not exist or value
-  /// can't bne converted to bool (any of ```['1', 'true', 'yes',
-  /// '0', 'false', 'no']```), return [fallback].
+  /// can't be converted to bool, return [fallback].
   bool asBool(String key, {bool fallback = false}) =>
       this.asBoolN(key) ?? fallback;
 
-  static final List<String> trueConstants = ['1', 'true', 'yes'];
-  static final List<String> falseConstants = ['0', 'false', 'no'];
-
   /// Try to get value at [key] as bool. If the key does not exist or value
-  /// can't bne converted to bool (any of ```['1', 'true', 'yes',
-  /// '0', 'false', 'no']```), return null.
+  /// can't be converted to bool, return null.
   bool? asBoolN(String key) {
     if (this[key] is bool) return this[key] as bool;
 
     final str = this[key]?.toString().toLowerCase();
-    if (trueConstants.contains(str)) return true;
-    if (falseConstants.contains(str)) return false;
-
-    return null;
+    return str == 'true'
+        ? true
+        : str == 'false'
+            ? false
+            : null;
   }
 
   /// Try to get value at [key] as DateTime. If the key does not exist or value
@@ -79,12 +75,18 @@ extension JsonParse on Json {
 
   /// Try to get value at [key] as Map. If the key does not exist or value is
   /// null, return [fallback].
-  Map<K, T> asMap<K, T>(String key, {Map<K, T>? fallback}) =>
-      (this[key] as Map? ?? fallback ?? <K, T>{}).cast<K, T>();
+  Map<K, T> asMap<K, T>(String key, {Map<K, T>? fallback}) {
+    return (asMapN<K, T>(key) ?? fallback ?? <K, T>{}).cast<K, T>();
+  }
 
   /// Try to get value at [key] as [Map<K, T>]. If the key does not exist or
   /// value is null, return null.
-  Map<K, T>? asMapN<K, T>(String key) => (this[key] as Map?)?.cast<K, T>();
+  Map<K, T>? asMapN<K, T>(String key) {
+    if (this[key] is! Map?) {
+      return null;
+    }
+    return (this[key] as Map?)?.cast<K, T>();
+  }
 
   /// Try to get value at [key] as [Json<T>]. If the key does not exist or value
   /// is null, return [fallback].
@@ -99,7 +101,7 @@ extension JsonParse on Json {
   /// is null, return [fallback]. If fallback is null, then empty [List<T>] is
   /// returned.
   List<T> asList<T>(String key, {List<T>? fallback}) =>
-      (this[key] as List? ?? fallback ?? <T>[]).cast<T>();
+      (asListN<T>(key) ?? fallback ?? <T>[]).cast<T>();
 
   /// Try to get value at [key] as [List<Json>]. If the key does not exist or
   /// value is null, return [fallback]. If fallback is null, then empty
@@ -109,7 +111,12 @@ extension JsonParse on Json {
 
   /// Try to get value at [key] as [List<Json>]. If the key does not exist or
   /// value is null, return null.
-  List<T>? asListN<T>(String key) => (this[key] as List?)?.cast<T>();
+  List<T>? asListN<T>(String key) {
+    if (this[key] is! List?) {
+      return null;
+    }
+    return (this[key] as List?)?.cast<T>();
+  }
 
   /// Try to get value at [key] as [List<Json>]. If the key does not exist or
   /// value is null, return null.

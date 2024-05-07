@@ -1,6 +1,7 @@
 ## 0.0.4
 
 - Updated the asBool and asBoolN methods to not crash on non bool value.
+- Updated the asMap(N) and asList(N) methods to not crash on incompatible value.
 
 ## 0.0.3
 
